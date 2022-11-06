@@ -2,21 +2,20 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:contracts/core/error/failuer.dart';
+import 'package:contracts/core/resources/const.dart';
 import 'package:contracts/featuers/add_contract/data/request/add_contract_request.dart';
-import 'package:contracts/featuers/add_contract/domain/entities/contract.dart';
 import 'package:dartz/dartz.dart';
 import 'package:http/http.dart' as http;
-import '../../../../core/error/execption.dart';
-import '../response/contract_response.dart';
 
-String url = 'http://127.0.0.1:8000/api/contracts/';
 
-abstract class RemoteDataSource {
+
+
+abstract class AddContractRemoteDataSource {
   Future<Either<Failuer, bool>> addContract(
       AddContractRequest addContractRequest);
 }
 
-class RemoteDataSourceImpl extends RemoteDataSource {
+class AddContractRemoteDataSourceImpl extends AddContractRemoteDataSource {
   @override
   Future<Either<Failuer, bool>> addContract(
       AddContractRequest addContractRequest) async {
@@ -27,7 +26,7 @@ class RemoteDataSourceImpl extends RemoteDataSource {
     final Map<String, dynamic> body = addContractRequest.toJson();
 
     try {
-      final http.Response response = await http.post(Uri.parse(url),
+      final http.Response response = await http.post(Uri.parse('${ConstManage.url}/contracts/'),
           headers: headers, body: jsonEncode(body));
       print(response.statusCode);
       if (response.statusCode == 201) {
@@ -39,8 +38,8 @@ class RemoteDataSourceImpl extends RemoteDataSource {
 
         // List<dynamic> errors = body['errors'];
 
-    
-        return Left(Failuer(message: "body['error']"));
+  
+        return Left(Failuer(message: body['error']));
       }
     } catch(e) {
       return Left(ServerFailure());

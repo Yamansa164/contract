@@ -7,7 +7,7 @@ import 'package:dartz/dartz.dart';
 import '../../data/request/add_contract_request.dart';
 
 class AddContractUseCase extends UseCase<AddContractRequest , bool> {
-  final Repositories repositories;
+  final AddContractRepositories repositories;
   AddContractUseCase({required this.repositories});
 
   @override

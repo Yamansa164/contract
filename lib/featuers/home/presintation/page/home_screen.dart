@@ -1,14 +1,13 @@
 import 'package:contracts/core/resources/routes_manager.dart';
 import 'package:contracts/core/resources/text_style_manager.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+
 import 'package:lottie/lottie.dart';
 
-import '../resources/assets_manager.dart';
-import '../resources/color_manager.dart';
-import '../resources/const.dart';
+import '../../../../core/resources/assets_manager.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../../../core/resources/const.dart';
+import '../widget/cell_home.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -33,32 +32,25 @@ class HomeScreen extends StatelessWidget {
             ),
             IntrinsicHeight(
               child: Row(
-                
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                       Text('البحث عن عقد',style: TextStyleMange.buttonTextStyle.copyWith(color: Colors.white),),
-                      Lottie.asset(AssetJson.search,height: SizeManage.screen.width/3,),
-                     
-                    ],
+                  CellHome(
+                    onTap: () {
+                      Navigator.pushNamed(context, Routes.searchContract);
+                    },
+                    text: 'البحث عن عقد',
+                    lottie: AssetJson.search,
                   ),
-                  
-                  const VerticalDivider(color: Colors.white,thickness: 3,),
-                  GestureDetector(
-             
-                    onTap: (){
+                  const VerticalDivider(
+                    color: Colors.white,
+                    thickness: 3,
+                  ),
+                  CellHome(
+                    text: 'اضافة عقد جديد',
+                    lottie: AssetJson.add,
+                    onTap: () {
                       Navigator.pushNamed(context, Routes.contractMaterial);
                     },
-                    child: Column(
-                      children: [
-                         Text('اضافة عقد جديد',style: TextStyleMange.buttonTextStyle.copyWith(color: Colors.white),),
-                        Lottie.asset(AssetJson.add,height:  SizeManage.screen.width/3),
-                       
-                      ],
-                    ),
                   )
                 ],
               ),

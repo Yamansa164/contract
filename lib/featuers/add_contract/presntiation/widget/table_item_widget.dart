@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/resources/const.dart';
 import '../../../../../core/resources/decoration_manager.dart';
-import '../bloc/add_contract_bloc.dart';
-import '../sub_widget.dart/new_button.dart';
+import '../../../../core/resources/color_manager.dart';
+import '../../../../core/widget/new_button.dart';
 import '../sub_widget.dart/table.dart';
+import '../bloc/add_contract_bloc.dart';
 
-class TableItemWidget extends StatelessWidget {
-  TableItemWidget({super.key, required this.bloc});
+
+class AddContractTableItemWidget extends StatelessWidget {
+  AddContractTableItemWidget({super.key, required this.bloc});
 
   AddContractBloc bloc;
 
@@ -20,7 +22,7 @@ class TableItemWidget extends StatelessWidget {
           height: SizeManage.screen.height / 2,
           width: SizeManage.screen.width - 400,
           child: Center(
-            child: TableWidget(
+            child: AddContractTableWidget(
               listRow: bloc.listRow,
             ),
           ),
@@ -37,6 +39,7 @@ class TableItemWidget extends StatelessWidget {
               onPressed: () {
                 bloc.add(ExcuteAddContract());
               },
+              width: 6,color: ColorManage.second
             ),
             NewButton(
               
@@ -44,6 +47,7 @@ class TableItemWidget extends StatelessWidget {
               onPressed: () {
                 bloc.add(GoToAddContractMaterial());
               },
+              width: 6,color: ColorManage.second
             ),
           ],
         ),

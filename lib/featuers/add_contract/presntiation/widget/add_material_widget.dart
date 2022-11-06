@@ -1,3 +1,4 @@
+import 'package:contracts/core/widget/new_button.dart';
 import 'package:contracts/featuers/add_contract/domain/entities/contract_material.dart';
 
 import 'package:contracts/core/resources/const.dart';
@@ -7,8 +8,8 @@ import 'package:flutter/material.dart';
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/decoration_manager.dart';
 
+import '../../../../core/widget/row_text_field.dart';
 import '../bloc/add_contract_bloc.dart';
-import '../sub_widget.dart/row_text_field.dart';
 
 class AddMaterialWidget extends StatelessWidget {
   AddMaterialWidget({super.key, required this.bloc});
@@ -50,16 +51,9 @@ class AddMaterialWidget extends StatelessWidget {
             SizedBox(
               height: SizeManage.screen.height / 50,
             ),
-            Container(
-              decoration: DecorationManage.buttonDecoration
-                  .copyWith(color: ColorManage.primery),
-              height: SizeManage.screen.height / 15,
-              width: SizeManage.screen.width / 12,
-              child: Center(
-                  child: TextButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    bloc.listRow.add(ContractMaterialModel(
+            NewButton(width: 12, buttonName: 'اضافة',onPressed: (){
+                if (_formKey.currentState!.validate()) {
+                    bloc.listRow.add(AddContractMaterialModel(
                         num: (bloc.listRow.length + 1),
                         name: bloc.materialName.text,
                         unit: bloc.materialUnit.text,
@@ -73,11 +67,22 @@ class AddMaterialWidget extends StatelessWidget {
                     bloc.materialPrice.clear();
                     bloc.materialUnit.clear();
                   }
-                },
-                child: Text('اضافة',
-                    style: TextStyle(color: Colors.white, fontSize: 18)),
-              )),
-            )
+
+            },color: ColorManage.primery)
+            // Container(
+            //   decoration: DecorationManage.buttonDecoration
+            //       .copyWith(color: ColorManage.primery),
+            //   height: SizeManage.screen.height / 15,
+            //   width: SizeManage.screen.width / 12,
+            //   child: Center(
+            //       child: TextButton(
+            //     onPressed: () {
+                
+            //     },
+            //     child: Text('اضافة',
+            //         style: TextStyle(color: Colors.white, fontSize: 18)),
+            //   )),
+            // )
           ],
         ),
       ),

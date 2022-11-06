@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../core/resources/const.dart';
-import 'column_text_field.dart';
+import '../../../../../../../core/resources/const.dart';
+import '../../../../core/widget/column_text_field.dart';
 
 class RowContract extends StatelessWidget {
   final String string1;

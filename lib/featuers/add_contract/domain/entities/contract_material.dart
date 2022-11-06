@@ -1,4 +1,4 @@
-class ContractMaterialModel {
+class AddContractMaterialModel {
   final int num;
 
   final String name;
@@ -7,7 +7,7 @@ class ContractMaterialModel {
   final double individualPrice;
   final double overallPrice;
 
-  ContractMaterialModel(
+  AddContractMaterialModel(
       {required this.num,
       required this.name,
       required this.unit,

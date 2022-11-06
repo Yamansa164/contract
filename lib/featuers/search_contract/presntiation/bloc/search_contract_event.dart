@@ -6,3 +6,7 @@ abstract class SearchContractEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+class GoBackToSearch extends SearchContractEvent{}
+class DoSearchContractEvent extends SearchContractEvent {}
+class GoToAddStatementsEvent extends SearchContractEvent {}
+

@@ -9,10 +9,13 @@ class ColumnTextField extends StatelessWidget {
   ColumnTextField(
       {required this.textEditingController,
       required this.title,
-      required this.type, this.lable=''});
+      required this.type,
+      this.lable = '',this.width=7,this.height=15});
   final String title;
   final String type;
   final String lable;
+  final int width;
+  final int height;
 
   final TextEditingController textEditingController;
 
@@ -22,12 +25,14 @@ class ColumnTextField extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text(
-          title,
-          style: const TextStyle(
-            color: Colors.black,
-          ),
-        ),
+        title == ''
+            ? const SizedBox()
+            : Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.black,
+                ),
+              ),
         Container(
           decoration: const BoxDecoration(color: Colors.white, boxShadow: [
             BoxShadow(
@@ -35,7 +40,8 @@ class ColumnTextField extends StatelessWidget {
               color: Colors.black,
             ),
           ]),
-          width: SizeManage.screen.width / 7,
+          width: SizeManage.screen.width / width,
+          height: SizeManage.screen.height/height,
           child: Padding(
             padding: EdgeInsets.only(right: SizeManage.screen.width / 80),
             child: Directionality(
@@ -46,7 +52,7 @@ class ColumnTextField extends StatelessWidget {
                   if (type != 'name') FilteringTextInputFormatter.digitsOnly
                 ],
                 controller: textEditingController,
-                decoration: InputDecoration(labelText:lable ),
+                decoration: InputDecoration(labelText: lable),
                 cursorColor: Colors.black,
                 textAlign: TextAlign.right,
                 validator: (value) {

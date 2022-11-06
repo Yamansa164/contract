@@ -16,7 +16,7 @@ part 'add_contract_state.dart';
 
 class AddContractBloc extends Bloc<AddContractEvent, AddContractState> {
   final AddContractUseCase addContractUseCase = instance<AddContractUseCase>();
-  List<ContractMaterialModel> listRow = [];
+  List<AddContractMaterialModel> listRow = [];
   AddContractBloc() : super(AddContractst()) {
     on<OnOpen>((event, emit) {
       emit(LoadingState());

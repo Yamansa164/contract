@@ -16,7 +16,7 @@ class DatePicker extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        Text(
+   title==''?const SizedBox():     Text(
           title,
           style: const TextStyle(
             color: Colors.black,

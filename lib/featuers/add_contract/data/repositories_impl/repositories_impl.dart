@@ -3,7 +3,6 @@ import 'package:contracts/core/network/network.dart';
 import 'package:contracts/featuers/add_contract/data/datasource/remote_data_source.dart';
 import 'package:contracts/featuers/add_contract/data/request/add_contract_request.dart';
 import 'package:contracts/featuers/add_contract/data/response/contract_response.dart';
-import 'package:contracts/featuers/add_contract/domain/entities/contract.dart';
 import 'package:dartz/dartz.dart';
 
 import 'package:contracts/featuers/add_contract/domain/usecase/add_contract_usecase.dart';
@@ -14,10 +13,10 @@ import 'package:contracts/core/error/failuer.dart';
 
 import '../../domain/repostitories/repositories.dart';
 
-class RepositoriesImpl extends Repositories {
+class AddContractRepositoriesImpl extends AddContractRepositories {
   // final NetworkInfo networkInfo;
-  final RemoteDataSource remoteDataSource;
-  RepositoriesImpl({required this.remoteDataSource});
+  final AddContractRemoteDataSource remoteDataSource;
+  AddContractRepositoriesImpl({required this.remoteDataSource});
 
   @override
   Future<Either<Failuer, bool>> addContract(

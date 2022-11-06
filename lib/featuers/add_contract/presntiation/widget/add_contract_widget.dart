@@ -1,14 +1,14 @@
-
 import 'package:contracts/core/resources/const.dart';
+import 'package:contracts/core/widget/new_button.dart';
 
 import 'package:flutter/material.dart';
 import '../../../../../core/resources/color_manager.dart';
 import '../../../../../core/resources/decoration_manager.dart';
 import '../../../../../core/resources/text_style_manager.dart';
+import '../../../../core/widget/column_text_field.dart';
+import '../../../../core/widget/date_picker.dart';
+import 'row_contract.dart';
 import '../bloc/add_contract_bloc.dart';
-import '../sub_widget.dart/column_text_field.dart';
-import '../sub_widget.dart/date_picker.dart';
-import '../sub_widget.dart/row_contract.dart';
 
 class AddContractWidget extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
@@ -125,25 +125,15 @@ class AddContractWidget extends StatelessWidget {
               SizedBox(
                 height: SizeManage.screen.height / 50,
               ),
-              Material(
-                type: MaterialType.transparency,
-                child: Container(
-                    // ignore: sort_child_properties_last
-                    child: Center(
-                      child: TextButton(
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            bloc.add(GoToTableItem());
-                          }
-                        },
-                        child: Text('اضافة المواد الخاصة بالعقد ',
-                            style: TextStyleMange.buttonTextStyle),
-                      ),
-                    ),
-                    width: SizeManage.screen.width / 5,
-                    height: SizeManage.screen.height / 12,
-                    decoration: DecorationManage.buttonDecoration),
-              ),
+              NewButton(
+                  width: 5,
+                  buttonName: 'اضافة المواد الخاصة بالعقد ',
+                  onPressed: (() {
+                    if (_formKey.currentState!.validate()) {
+                      bloc.add(GoToTableItem());
+                    }
+                  }),
+                  color: ColorManage.second),
             ],
           ),
         ),

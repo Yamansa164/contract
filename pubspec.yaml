@@ -79,6 +79,8 @@ flutter:
     - assets/json/success.json
     - assets/json/search.json
     - assets/json/add.json
+    - assets/json/empty.json
+    - assets/json/contract1.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
