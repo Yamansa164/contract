@@ -1,18 +1,14 @@
-import 'package:contracts/core/resources/color_manager.dart';
-import 'package:contracts/core/widget/column_text_field.dart';
-import 'package:contracts/core/widget/new_button.dart';
-import 'package:contracts/featuers/search_contract/domain/entities/list_contract_model.dart';
-import 'package:contracts/featuers/search_contract/presntiation/bloc/contract_bloc.dart';
 import 'package:easy_table/easy_table.dart';
 import 'package:flutter/material.dart';
 
-import '../../../../../../../core/resources/text_style_manager.dart';
+import '../../../../core/resources/text_style_manager.dart';
+import '../../domain/entities/list_contract_model.dart';
+import '../bloc/contract_bloc.dart';
 
-// ignore: must_be_immutable
-class StatementsTableWidget extends StatelessWidget {
-  StatementsTableWidget({super.key, required this.bloc});
+class MaterialTableSubContract extends StatelessWidget {
+  const MaterialTableSubContract({super.key, required this.bloc});
 
-  ContractBloc bloc;
+  final ContractBloc bloc;
   @override
   Widget build(BuildContext context) {
     List<EasyTableColumn<MaterialModel>> listColumn = [
@@ -20,7 +16,8 @@ class StatementsTableWidget extends StatelessWidget {
           name: 'السعر الاجمالي ',
           headerTextStyle: TextStyleMange.headerTextStyle,
           cellBuilder: (context, data) {
-            return Text((data.row.individualPrice*data.row.newAmount).toString());
+            return Text(
+                (data.row.individualPrice * data.row.newAmount).toString());
           },
           headerAlignment: Alignment.center,
           cellAlignment: Alignment.center,
@@ -38,7 +35,7 @@ class StatementsTableWidget extends StatelessWidget {
           name: 'الكمية ',
           headerTextStyle: TextStyleMange.headerTextStyle,
           cellBuilder: (context, data) {
-            return Text('${data.row.newAmount}/${data.row.amount}');
+            return Text('${data.row.newAmount}');
           },
           headerAlignment: Alignment.center,
           cellAlignment: Alignment.center,

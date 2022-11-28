@@ -7,14 +7,14 @@ import '../../domain/entities/contract_material.dart';
 
 
 // ignore: must_be_immutable
-class AddContractTableWidget extends StatelessWidget {
-  AddContractTableWidget( {required this.listRow});
+class AddMaterialContractTable extends StatelessWidget {
+  AddMaterialContractTable( {super.key, required this.listRow});
 List<AddContractMaterialModel> listRow;
   @override
   Widget build(BuildContext context) {
     return Material(
       type: MaterialType.transparency,
-      child: EasyTable(
+      child: EasyTable<AddContractMaterialModel>(
         EasyTableModel<AddContractMaterialModel>(rows: listRow, columns: listColumn),
         columnsFit: true,
       ),

@@ -27,7 +27,7 @@ AddContractError({required this.message});
 }
 
 class TableItemState extends AddContractState {
-  List<AddContractMaterialModel> list;
+  List list;
   TableItemState({required this.list});
   @override
   List<Object?> get props => [list];

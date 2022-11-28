@@ -11,8 +11,8 @@ import '../../../../../core/resources/decoration_manager.dart';
 import '../../../../core/widget/row_text_field.dart';
 import '../bloc/add_contract_bloc.dart';
 
-class AddMaterialWidget extends StatelessWidget {
-  AddMaterialWidget({super.key, required this.bloc});
+class AddMaterialToContractWidget extends StatelessWidget {
+  AddMaterialToContractWidget({super.key, required this.bloc});
   AddContractBloc bloc;
 
   final _formKey = GlobalKey<FormState>();
@@ -69,20 +69,7 @@ class AddMaterialWidget extends StatelessWidget {
                   }
 
             },color: ColorManage.primery)
-            // Container(
-            //   decoration: DecorationManage.buttonDecoration
-            //       .copyWith(color: ColorManage.primery),
-            //   height: SizeManage.screen.height / 15,
-            //   width: SizeManage.screen.width / 12,
-            //   child: Center(
-            //       child: TextButton(
-            //     onPressed: () {
-                
-            //     },
-            //     child: Text('اضافة',
-            //         style: TextStyle(color: Colors.white, fontSize: 18)),
-            //   )),
-            // )
+            
           ],
         ),
       ),

@@ -1,7 +1,7 @@
 import 'package:contracts/core/resources/color_manager.dart';
 import 'package:contracts/core/widget/new_button.dart';
 import 'package:contracts/featuers/search_contract/domain/entities/list_contract_model.dart';
-import 'package:contracts/featuers/search_contract/presntiation/bloc/search_contract_bloc.dart';
+import 'package:contracts/featuers/search_contract/presntiation/bloc/contract_bloc.dart';
 import 'package:easy_table/easy_table.dart';
 import 'package:flutter/material.dart';
 
@@ -11,13 +11,11 @@ import '../../../../../../../core/resources/text_style_manager.dart';
 class SearchContractTableWidget extends StatelessWidget {
   SearchContractTableWidget({super.key, required this.bloc});
 
-  SearchContractBloc bloc;
+  ContractBloc bloc;
   @override
   Widget build(BuildContext context) {
     List<EasyTableColumn<ContractsModel>> listColumn = [
       EasyTableColumn<ContractsModel>(
-          resizable: false,
-          width: 200,
           name: 'الكشوف ',
           headerTextStyle: TextStyleMange.headerTextStyle,
           cellBuilder: (context, data) {
@@ -25,23 +23,55 @@ class SearchContractTableWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 NewButton(
-                  width: 20,
-                  buttonName: 'اضافة كشف',
+                  width: 22,
+                  buttonName: 'اضافة',
                   color: ColorManage.primery,
                   onPressed: () {
-                    bloc.contractsModel=data.row;
-                 
+                    bloc.contractsModel = data.row;
+
                     bloc.add(GoToAddStatementsEvent());
                   },
                   fontsize: 12,
                 ),
                 NewButton(
-                  width: 20,
-                  buttonName: 'عرض كشف',
+                  width: 22,
+                  buttonName: 'عرض',
                   color: ColorManage.primery,
                   onPressed: () {
-                    print(data.row.contractNum);
-                 
+                    print(data.row.id);
+                    bloc.add(DoGetStatements(contractId: data.row.id));
+                  },
+                  fontsize: 12,
+                ),
+              ],
+            );
+          },
+          headerAlignment: Alignment.center,
+          cellAlignment: Alignment.center,
+          cellTextStyle: TextStyleMange.cellTextStyle),
+      EasyTableColumn<ContractsModel>(
+          name: 'الملاحق ',
+          headerTextStyle: TextStyleMange.headerTextStyle,
+          cellBuilder: (context, data) {
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                NewButton(
+                  width: 22,
+                  buttonName: 'اضافة ',
+                  color: ColorManage.primery,
+                  onPressed: () {
+                      bloc.contractsModel = data.row;
+                    bloc.add(GoToAddSubContractinitial());
+                  },
+                  fontsize: 12,
+                ),
+                NewButton(
+                  width: 22,
+                  buttonName: 'عرض',
+                  color: ColorManage.primery,
+                  onPressed: () {
+                    print(data.row.id);
                   },
                   fontsize: 12,
                 ),
@@ -62,7 +92,8 @@ class SearchContractTableWidget extends StatelessWidget {
               buttonName: 'عرض المواد',
               color: ColorManage.primery,
               onPressed: () {
-                print(data.row.contractNum);
+                bloc.add(GoToShowMaterialTableEvenet(
+                    listRow: data.row.listMaterial));
               },
               fontsize: 12,
             );

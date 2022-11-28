@@ -47,7 +47,6 @@ class ColumnTextField extends StatelessWidget {
             child: Directionality(
               textDirection: TextDirection.rtl,
               child: TextFormField(
-                restorationId: 'da',
                 inputFormatters: <TextInputFormatter>[
                   if (type != 'name') FilteringTextInputFormatter.digitsOnly
                 ],

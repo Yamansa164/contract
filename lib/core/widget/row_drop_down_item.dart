@@ -6,8 +6,8 @@ import 'package:flutter/src/widgets/framework.dart';
 
 import '../../../../core/resources/input_decoration_manager.dart';
 
-class DropDownItem extends StatelessWidget {
-  const DropDownItem(
+class RowDropDownItem extends StatelessWidget {
+  const RowDropDownItem(
       {super.key,
       required this.items,
       required this.onChanged,

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/resources/color_manager.dart';
-import '../../../../core/resources/const.dart';
-import '../../../../core/resources/decoration_manager.dart';
-import '../../../../core/widget/new_button.dart';
-import '../../../../core/widget/row_text_field.dart';
-import '../bloc/search_contract_bloc.dart';
+import '../../../../../core/resources/color_manager.dart';
+import '../../../../../core/resources/const.dart';
+import '../../../../../core/resources/decoration_manager.dart';
+import '../../../../../core/widget/new_button.dart';
+import '../../../../../core/widget/row_text_field.dart';
+import '../../bloc/contract_bloc.dart';
 
 class SearchContainer extends StatelessWidget {
   const SearchContainer({
@@ -13,7 +13,7 @@ class SearchContainer extends StatelessWidget {
     required this.bloc,
   }) : super(key: key);
 
-  final SearchContractBloc bloc;
+  final ContractBloc bloc;
 
   @override
   Widget build(BuildContext context) {

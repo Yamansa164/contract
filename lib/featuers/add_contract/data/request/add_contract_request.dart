@@ -8,15 +8,16 @@ class AddContractRequest {
   final String executionPeriod;
   final int upPercent;
   final int downPercent;
+  final int stoppingsPercent;
   final String number;
   final String branch;
   final String content;
-  final double price;
-  final double upPrice;
+
   final List<ContractMaterialsRequest> materials;
 
   AddContractRequest(
       {required this.name,
+      required this.stoppingsPercent,
       required this.executingAgency,
       required this.watchingAgency,
       required this.date,
@@ -28,8 +29,6 @@ class AddContractRequest {
       required this.number,
       required this.branch,
       required this.content,
-      required this.price,
-      required this.upPrice,
       required this.materials});
 
   factory AddContractRequest.fromJson(Map<String, dynamic> json) {
@@ -43,18 +42,17 @@ class AddContractRequest {
         executionPeriod: json['execution_period'],
         upPercent: json['up_percent'],
         downPercent: json['down_percent'],
+        stoppingsPercent: json['stoppings_percent'],
         number: json['number'],
         branch: json['branch'],
         content: json['content'],
-        price: json['price'],
-        upPrice: json['up_price'],
         materials: List.from(json['materials'])
             .map((e) => ContractMaterialsRequest.fromJson(e))
             .toList());
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
     data['executing_agency'] = executingAgency;
     data['watching_agency'] = watchingAgency;
@@ -64,11 +62,12 @@ class AddContractRequest {
     data['execution_period'] = executionPeriod;
     data['up_percent'] = upPercent;
     data['down_percent'] = downPercent;
+
+    data['stoppings_percent'] = stoppingsPercent;
+
     data['number'] = number;
     data['branch'] = branch;
     data['content'] = content;
-    data['price'] = price;
-    data['up_price'] = upPrice;
     data['materials'] = materials.map((v) => v.toJson()).toList();
 
     return data;
@@ -81,7 +80,7 @@ class ContractMaterialsRequest {
   final int quantity;
   final double individualPrice;
   final double overallPrice;
-  final  String number;
+  final String number;
 
   ContractMaterialsRequest(
       {required this.materialName,

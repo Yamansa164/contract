@@ -28,12 +28,9 @@ class AddContractRemoteDataSourceImpl extends AddContractRemoteDataSource {
     try {
       final http.Response response = await http.post(Uri.parse('${ConstManage.url}/contracts/'),
           headers: headers, body: jsonEncode(body));
-      print(response.statusCode);
       if (response.statusCode == 201) {
-        print(response.body);
-        return Right(true);
+        return const Right(true);
       } else {
-        print('ferror');
         final body = jsonDecode(response.body);
 
         // List<dynamic> errors = body['errors'];

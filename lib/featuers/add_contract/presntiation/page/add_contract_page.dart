@@ -63,7 +63,7 @@ class AddContractPage extends StatelessWidget {
                     bloc: bloc,
                   );
                 } else if (state is AddContractMaterialState) {
-                  return AddMaterialWidget(
+                  return AddMaterialToContractWidget(
                     bloc: bloc,
                   );
                 } else if (state is AddContractError) {

@@ -10,7 +10,7 @@ class MaterialsResponse {
     required this.unit,
   });
   late final int id;
-  late final int number;
+  late final String number;
   late final String materialName;
   late final int contractId;
   late final double individualPrice;

@@ -32,21 +32,22 @@ class AddContractBloc extends Bloc<AddContractEvent, AddContractState> {
       emit(LoadingState());
       Either<Failuer, bool> successOrFaliuer = await addContractUseCase.excute(
           input: AddContractRequest(
-              name: projectName.text,
-              executingAgency: executingAgency.text,
-              watchingAgency: watchingAgency.text,
-              date: _contractDate,
-              startingDate: _startDate,
-              finishingDate: _finishingDate,
-              executionPeriod: executionPeriod.text,
-              upPercent: int.parse(upPercent.text),
-              downPercent: int.parse(downPercent.text),
-              number: contractNum.text,
-              branch: branch.text,
-              content: content.text,
-              price: double.parse(contractPrice.text),
-              upPrice: double.parse(newPrice.text),
-              materials: List.from(listRow.map((e) => e.toRequest()))));
+        name: projectName.text,
+        executingAgency: executingAgency.text,
+        watchingAgency: watchingAgency.text,
+        date: contractDate.text,
+        startingDate: startDate.text,
+        finishingDate: finishDate.text,
+        executionPeriod: executionPeriod.text,
+        upPercent: int.parse(upPercent.text),
+        downPercent: int.parse(downPercent.text),
+        number: contractNum.text,
+        stoppingsPercent: int.parse(stopping.text),
+        branch: branch.text,
+        content: 's',
+        materials: List<ContractMaterialsRequest>.from(
+            listRow.map((e) => e.toRequest())),
+      ));
       successOrFaliuer.fold((faliuer) {
         emit(AddContractError(message: faliuer.message));
       }, (_) {
@@ -67,44 +68,56 @@ class AddContractBloc extends Bloc<AddContractEvent, AddContractState> {
 
   ///1 2  3
   final TextEditingController branch = TextEditingController();
-  final TextEditingController projectName = TextEditingController();
+  final TextEditingController addressName = TextEditingController();
   final TextEditingController contractNum = TextEditingController();
 
   /// 4  5   6
   final TextEditingController executionPeriod = TextEditingController();
-  final TextEditingController content = TextEditingController();
+  final TextEditingController projectName = TextEditingController();
 
-  final TextEditingController contractPrice = TextEditingController();
+  final TextEditingController stopping = TextEditingController();
 
   /// 7 8 9
   final TextEditingController upPercent = TextEditingController(text: '0');
   final TextEditingController downPercent = TextEditingController(text: '0');
-  final TextEditingController newPrice = TextEditingController(text: '0');
 
-  /// 13 14
+  /// 13 c
   final TextEditingController executingAgency = TextEditingController();
   final TextEditingController watchingAgency = TextEditingController();
 
-  String _startDate = '';
+  ///date
+  final TextEditingController startDate = TextEditingController();
+  final TextEditingController finishDate = TextEditingController();
+  final TextEditingController contractDate = TextEditingController();
+
   void setStartDate(String date) {
-    _startDate = date;
+    startDate.text = date;
   }
 
-  String get getStartDate => _startDate;
-
-  String _finishingDate = '';
   void setFinishingDate(String date) {
-    _finishingDate = date;
+    finishDate.text = date;
   }
 
-  String get getFinishingDate => _finishingDate;
-
-  String _contractDate = '';
   void setContractDate(String date) {
-    _contractDate = date;
+    contractDate.text = date;
   }
 
-  String get getContractDate => _contractDate;
+  void setBranch(String branchName) {
+    branch.text = branchName;
+  }
+
+  void setexecutingAgency(String executingAgencyName) {
+    executingAgency.text = executingAgencyName;
+  }
+
+  void setwatchingAgency(String watchingAgencyName) {
+    watchingAgency.text = watchingAgencyName;
+  }
+
+  void setAddressName(String addressNameText) {
+    addressName.text = addressNameText;
+  }
+
   ////////////
   ////
   ///material info
@@ -118,12 +131,15 @@ class AddContractBloc extends Bloc<AddContractEvent, AddContractState> {
     branch.clear();
     contractNum.clear();
     executingAgency.clear();
-    content.clear();
-    contractPrice.clear();
-    upPercent.text='0';
-    downPercent.text='0';
-    newPrice.text='0';
+    addressName.clear();
+
+    upPercent.text = '0';
+    downPercent.text = '0';
+
     watchingAgency.clear();
     executionPeriod.clear();
+    startDate.clear();
+    startDate.clear();
+    contractDate.clear();
   }
 }
