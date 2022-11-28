@@ -38,9 +38,10 @@ class AddContractPage extends StatelessWidget {
                 if (state is AddContractst) {
                   return Lottie.asset(AssetJson.contract,
                       height: SizeManage.screen.height / 6);
-                } else
+                } else {
                   return Lottie.asset(AssetJson.truck,
                       height: SizeManage.screen.height / 6);
+                }
               },
             ),
             SizedBox(

@@ -8,10 +8,12 @@ import '../../../../../core/resources/input_decoration_manager.dart';
 class RowTextField extends StatelessWidget {
   RowTextField(
       {required this.textEditingController,
+      this.labelText='',
       required this.title,
       required this.type});
   final String title;
   final String type;
+  final String labelText;
   final TextEditingController textEditingController;
 
   @override
@@ -45,6 +47,7 @@ class RowTextField extends StatelessWidget {
                   if (value!.isEmpty) return 'الرجاء ادخل معلومات';
                   return null;
                 },
+                
               ),
             ),
           ),

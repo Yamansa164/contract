@@ -6,6 +6,7 @@ class ListContractsModel {
 }
 
 class ContractsModel {
+  final int id;
   final String branch;
   final String contractNum;
   final String executingAgency;
@@ -13,7 +14,8 @@ class ContractsModel {
   final List<MaterialModel> listMaterial;
 
   ContractsModel(
-      {required this.listMaterial,
+      {required this.id,
+      required this.listMaterial,
       required this.branch,
       required this.contractNum,
       required this.executingAgency,
@@ -21,15 +23,21 @@ class ContractsModel {
 }
 
 class MaterialModel {
+  final int id;
   final int number;
   final String name;
   final String unit;
+  final int amount;
+  int newAmount ;
   final double individualPrice;
-  final TextEditingController statementsAmount = TextEditingController();
+  // final TextEditingController statementsAmount = TextEditingController();
 
   MaterialModel(
-      {required this.number,
+      {required this.id,
+      required this.number,
       required this.name,
+      required this.amount,
       required this.unit,
-      required this.individualPrice});
+      required this.individualPrice,
+      this.newAmount=0});
 }

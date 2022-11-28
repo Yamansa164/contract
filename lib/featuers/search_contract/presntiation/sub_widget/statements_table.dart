@@ -17,16 +17,28 @@ class StatementsTableWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     List<EasyTableColumn<MaterialModel>> listColumn = [
       EasyTableColumn<MaterialModel>(
+          name: 'السعر الاجمالي ',
+          headerTextStyle: TextStyleMange.headerTextStyle,
+          cellBuilder: (context, data) {
+            return Text((data.row.individualPrice*data.row.newAmount).toString());
+          },
+          headerAlignment: Alignment.center,
+          cellAlignment: Alignment.center,
+          cellTextStyle: TextStyleMange.cellTextStyle),
+      EasyTableColumn<MaterialModel>(
+          name: 'السعر الافرادي ',
+          headerTextStyle: TextStyleMange.headerTextStyle,
+          cellBuilder: (context, data) {
+            return Text('${data.row.individualPrice}');
+          },
+          headerAlignment: Alignment.center,
+          cellAlignment: Alignment.center,
+          cellTextStyle: TextStyleMange.cellTextStyle),
+      EasyTableColumn<MaterialModel>(
           name: 'الكمية ',
           headerTextStyle: TextStyleMange.headerTextStyle,
           cellBuilder: (context, data) {
-            return ColumnTextField(
-              textEditingController: data.row.statementsAmount,
-              title: '',
-              type: 'num',
-              width: 8,
-              height: 27,
-            );
+            return Text('${data.row.newAmount}/${data.row.amount}');
           },
           headerAlignment: Alignment.center,
           cellAlignment: Alignment.center,
@@ -57,8 +69,7 @@ class StatementsTableWidget extends StatelessWidget {
       type: MaterialType.transparency,
       child: EasyTable(
         EasyTableModel<MaterialModel>(
-            rows: bloc.contractsModel!.listMaterial.map((e) => e).toList(),
-            columns: listColumn),
+            rows: bloc.listMaterialModel, columns: listColumn),
         columnsFit: true,
       ),
     );

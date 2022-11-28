@@ -30,8 +30,7 @@ class SearchContractTableWidget extends StatelessWidget {
                   color: ColorManage.primery,
                   onPressed: () {
                     bloc.contractsModel=data.row;
-                    // print(data.row.listMaterial.map((e) => e.name));
-                    // print(bloc.listContractsModel!.contract.map((e) => e.listMaterial));
+                 
                     bloc.add(GoToAddStatementsEvent());
                   },
                   fontsize: 12,
@@ -42,6 +41,7 @@ class SearchContractTableWidget extends StatelessWidget {
                   color: ColorManage.primery,
                   onPressed: () {
                     print(data.row.contractNum);
+                 
                   },
                   fontsize: 12,
                 ),

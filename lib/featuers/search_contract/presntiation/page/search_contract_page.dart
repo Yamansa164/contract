@@ -3,6 +3,8 @@ import 'package:contracts/core/widget/new_button.dart';
 import 'package:contracts/featuers/add_contract/presntiation/bloc/add_contract_bloc.dart';
 import 'package:contracts/featuers/search_contract/presntiation/bloc/search_contract_bloc.dart';
 import 'package:contracts/featuers/search_contract/presntiation/sub_widget/contract_table.dart';
+import 'package:contracts/featuers/search_contract/presntiation/sub_widget/drop_down_item.dart';
+import 'package:contracts/featuers/search_contract/presntiation/widget/add_new_material.dart';
 import 'package:contracts/featuers/search_contract/presntiation/widget/add_statements.dart';
 import 'package:contracts/featuers/search_contract/presntiation/widget/table_item.dart';
 import 'package:flutter/material.dart';
@@ -46,6 +48,9 @@ class SearchContract extends StatelessWidget {
                 if (state is AddStatementsInitial) {
                   return Lottie.asset(AssetJson.contract,
                       height: SizeManage.screen.height / 4);
+                } else if (state is AddStatementsMaterialInitial) {
+                  return Lottie.asset(AssetJson.truck,
+                      height: SizeManage.screen.height / 4);
                 } else {
                   return Lottie.asset(AssetJson.search,
                       height: SizeManage.screen.height / 4);
@@ -81,10 +86,9 @@ class SearchContract extends StatelessWidget {
                     bloc.listContractsModel = state.listContracts;
                     return TableItemWidget(
                       buttonName: 'الرجوع',
-          
-          onPressed: () {
-            bloc.add(GoBackToSearch());
-          },
+                      onPressed: () {
+                        bloc.add(GoBackToSearch());
+                      },
                       bloc: bloc,
                       tableWidget: SearchContractTableWidget(bloc: bloc),
                     );
@@ -93,6 +97,15 @@ class SearchContract extends StatelessWidget {
                   return AddStatementsWidget(
                     bloc: bloc,
                   );
+                } else if (state is AddStatementsMaterialInitial) {
+                  return AddNewMaterialToStatements(bloc: bloc);
+                } else if (state is AddStatementsMaterialFaield) {
+                  return LottieWidget(
+                      text: state.message,
+                      lottie: AssetJson.empty,
+                      onPressed: () {
+                        bloc.add(GoToAddStatementsMaterialEvent());
+                      });
                 }
                 return LottieWidget(
                   text: 'يوجد خطأ ما',

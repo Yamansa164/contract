@@ -1,5 +1,5 @@
 class AddContractMaterialModel {
-  final int num;
+  final String num;
 
   final String name;
   final String unit;

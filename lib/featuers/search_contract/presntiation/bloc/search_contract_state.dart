@@ -25,13 +25,11 @@ class SearchContractFaield extends SearchContractState {
   List<Object> get props => [failuer];
 }
 
-
 class AddStatementsInitial extends SearchContractState {}
 
 class AddStatementsLoading extends SearchContractState {}
 
 class AddStatementssuccess extends SearchContractState {
-
   @override
   List<Object> get props => [];
 }
@@ -42,4 +40,14 @@ class AddStatementsFaield extends SearchContractState {
   @override
   List<Object> get props => [failuer];
 }
+
+class AddStatementsMaterialInitial extends SearchContractState {}
+
+class AddStatementsMaterialFaield extends SearchContractState {
+  final String message;
+  const AddStatementsMaterialFaield({required this.message});
+
+  
+}
+
 

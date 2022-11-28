@@ -12,9 +12,11 @@ import 'package:flutter/src/widgets/framework.dart';
 class AddStatementsWidget extends StatelessWidget {
   AddStatementsWidget({super.key, required this.bloc});
   SearchContractBloc bloc;
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Form(
+      key: _formKey,
       child: Column(
         children: [
           Row(
@@ -44,11 +46,13 @@ class AddStatementsWidget extends StatelessWidget {
             tableWidget: StatementsTableWidget(bloc: bloc),
             buttonName: 'تنظيم الكشف',
             onPressed: () {
-              print(bloc.contractsModel!.listMaterial.map((e) {
-                print(e.statementsAmount.text);
-                print(e.name);
-                print(bloc.getStatementDate);
-              }));
+            if(_formKey.currentState!.validate()){
+              print('object');
+            }
+            },
+            buttonName2: 'اضافة مادة',
+            onPressed2: (){
+                bloc.add(GoToAddStatementsMaterialEvent());
             },
           )
         ],

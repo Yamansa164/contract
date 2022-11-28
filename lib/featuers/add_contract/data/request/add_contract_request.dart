@@ -81,7 +81,7 @@ class ContractMaterialsRequest {
   final int quantity;
   final double individualPrice;
   final double overallPrice;
-  final int number;
+  final  String number;
 
   ContractMaterialsRequest(
       {required this.materialName,

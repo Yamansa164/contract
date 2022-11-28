@@ -7,8 +7,10 @@ import '../../data/response/contract_response.dart';
 extension MaterialModelMapper on MaterialsResponse? {
   MaterialModel toModel() {
     return MaterialModel(
+        id: this!.id,
         number: this!.number,
         name: this!.materialName,
+        amount: this!.quantity,
         unit: this!.unit,
         individualPrice: this!.individualPrice);
   }
@@ -17,6 +19,7 @@ extension MaterialModelMapper on MaterialsResponse? {
 extension ContractsModelMapper on ContractResponse? {
   ContractsModel toModel() {
     return ContractsModel(
+      id: this!.id,
       branch: this!.branch,
       contractNum: this!.number,
       executingAgency: this!.executingAgency,

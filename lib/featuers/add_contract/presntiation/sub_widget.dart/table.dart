@@ -60,7 +60,7 @@ List<AddContractMaterialModel> listRow;
     EasyTableColumn<AddContractMaterialModel>(
         name: 'الرقم',
         headerTextStyle: TextStyleMange.headerTextStyle,
-        intValue: ((row) => row.num),
+        stringValue: ((row) => row.num),
         headerAlignment: Alignment.center,
         cellAlignment: Alignment.center,
         cellTextStyle:TextStyleMange.cellTextStyle),

@@ -54,7 +54,7 @@ class AddMaterialWidget extends StatelessWidget {
             NewButton(width: 12, buttonName: 'اضافة',onPressed: (){
                 if (_formKey.currentState!.validate()) {
                     bloc.listRow.add(AddContractMaterialModel(
-                        num: (bloc.listRow.length + 1),
+                        num: (bloc.listRow.length + 1).toString(),
                         name: bloc.materialName.text,
                         unit: bloc.materialUnit.text,
                         amount: int.parse(bloc.materialAmount.text),

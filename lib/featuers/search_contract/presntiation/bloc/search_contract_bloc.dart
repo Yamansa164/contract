@@ -36,8 +36,15 @@ class SearchContractBloc
       emit(SearchContractInitial());
     });
     on<GoToAddStatementsEvent>((event, emit) {
-      print(listContractsModel!.contract.map((e) => e.listMaterial.map((e) => e.name)));
+      print(listContractsModel!.contract
+          .map((e) => e.listMaterial.map((e) => e.name)));
       emit(AddStatementsInitial());
+    });
+    on<GoToAddStatementsMaterialEvent>((event, emit) {
+      emit(AddStatementsMaterialInitial());
+    });
+    on<MaterialAmountFaieldEvent>((event, emit) {
+      emit(AddStatementsMaterialFaield(message: event.message));
     });
   }
   static SearchContractBloc getBloc(BuildContext context) {
@@ -47,13 +54,27 @@ class SearchContractBloc
   final TextEditingController branch = TextEditingController();
   final TextEditingController contractNum = TextEditingController();
   final TextEditingController executingAgency = TextEditingController();
+  final TextEditingController materialAmount = TextEditingController();
 
-  String _statementDate = '';
-  String get getStatementDate => _statementDate;
+  String? _statementDate ;
+  String? get getStatementDate => _statementDate;
   void setStatementDate(String date) {
     _statementDate = date;
   }
 
+  int _selectedMaterial = 0;
+  int get getSelectedMaterial => _selectedMaterial;
+  void setSelectedMaterial(String number) {
+    _selectedMaterial = int.parse(number) - 1;
+  }
+
+  int _maxAmount = 0;
+  int get getMaxAmount => _maxAmount;
+  void setMaxAmount(int amount) {
+    _maxAmount = amount;
+  }
+
   ListContractsModel? listContractsModel;
   ContractsModel? contractsModel;
+  List<MaterialModel> listMaterialModel = [];
 }
