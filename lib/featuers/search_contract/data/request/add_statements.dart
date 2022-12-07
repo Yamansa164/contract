@@ -1,7 +1,7 @@
 class AddStatementRequest {
   final String date;
   final String discount;
-  final List<StatementMaterials> materials;
+  final List<StatementMaterialsRequest> materials;
 
   AddStatementRequest(
       {required this.date, required this.materials, required this.discount});
@@ -11,7 +11,7 @@ class AddStatementRequest {
         date: json['date'],
         discount: json['discount'],
         materials: List.from(json['materials'])
-            .map((e) => StatementMaterials.fromJson(e))
+            .map((e) => StatementMaterialsRequest.fromJson(e))
             .toList()));
   }
 
@@ -24,19 +24,19 @@ class AddStatementRequest {
   }
 }
 
-class StatementMaterials {
+class StatementMaterialsRequest {
   int materialId;
   int quantity;
 
-  StatementMaterials({required this.materialId, required this.quantity});
+  StatementMaterialsRequest({required this.materialId, required this.quantity});
 
-  factory StatementMaterials.fromJson(Map<String, dynamic> json) {
-    return (StatementMaterials(
+  factory StatementMaterialsRequest.fromJson(Map<String, dynamic> json) {
+    return (StatementMaterialsRequest(
         materialId: json['material_id'], quantity: json['quantity']));
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['material_id'] = materialId;
     data['quantity'] = quantity;
     return data;

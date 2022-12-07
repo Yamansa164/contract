@@ -1,5 +1,5 @@
 import 'package:contracts/core/error/failuer.dart';
-import 'package:contracts/featuers/search_contract/data/response/statement.dart';
+import 'package:contracts/featuers/search_contract/data/request/add_sub_contract.dart';
 import 'package:contracts/featuers/search_contract/domain/entities/list_contract_model.dart';
 import 'package:dartz/dartz.dart';
 
@@ -15,4 +15,7 @@ abstract class ContractRepositories {
       {required AddStatementRequest addStatementRequest,
       required int contractId});
   Future<Either<Failuer, ListStatementModel>> getStatements({required int contractId});
+   Future<Either<Failuer, bool>> addSubContract(
+      {required AddSubContractRequest addSubContractRequest,
+      required int contractId});
 }

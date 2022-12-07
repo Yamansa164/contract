@@ -1,6 +1,6 @@
 import 'package:contracts/featuers/search_contract/data/datasource/remote_datasource.dart';
 import 'package:contracts/featuers/search_contract/data/request/add_statements.dart';
-import 'package:contracts/featuers/search_contract/data/response/list_contracts_response.dart';
+import 'package:contracts/featuers/search_contract/data/request/add_sub_contract.dart';
 import 'package:contracts/featuers/search_contract/data/response/statement.dart';
 import 'package:contracts/featuers/search_contract/domain/mapper/mapper.dart';
 import 'package:dartz/dartz.dart';
@@ -12,6 +12,7 @@ import 'package:contracts/core/error/failuer.dart';
 import '../../../../core/error/execption.dart';
 import '../../domain/entities/list_statements_model.dart';
 import '../../domain/repostitories/repositories.dart';
+import '../response/contract_response.dart';
 
 class ContractRepositoriesImpl extends ContractRepositories {
   final ContractRemoteDatasource contractRemoteDatesource;
@@ -26,7 +27,7 @@ class ContractRepositoriesImpl extends ContractRepositories {
       required String branch,
       required String executingAgency}) async {
     try {
-      final Either<Failuer, ListContractsResponse> addSuccess =
+      final Either<Failuer, ListContractResponse> addSuccess =
           await contractRemoteDatesource.searchContract(
               number: number, branch: branch, executingAgency: executingAgency);
 
@@ -73,6 +74,26 @@ class ContractRepositoriesImpl extends ContractRepositories {
         return Left(faliuer);
       }, (statements) {
         return right(statements.toModel());
+      });
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+  ////////// add sub contract
+
+  @override
+  Future<Either<Failuer, bool>> addSubContract(
+      {required AddSubContractRequest addSubContractRequest,
+      required int contractId}) async {
+    try {
+      final Either<Failuer, bool> addSuccess =
+          await contractRemoteDatesource.addSubContract(
+              addSubContractRequest: addSubContractRequest, contractId: contractId);
+ print('trs');
+      return addSuccess.fold((faliuer) {
+        return Left(faliuer);
+      }, (bool) {
+        return right(bool);
       });
     } on ServerException {
       return Left(ServerFailure());

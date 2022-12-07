@@ -20,7 +20,7 @@ class StatementsTableWidget extends StatelessWidget {
           name: 'السعر الاجمالي ',
           headerTextStyle: TextStyleMange.headerTextStyle,
           cellBuilder: (context, data) {
-            return Text((data.row.individualPrice*data.row.newAmount).toString());
+            return Text((data.row.individualPrice*data.row.newQuantity).toString());
           },
           headerAlignment: Alignment.center,
           cellAlignment: Alignment.center,
@@ -38,7 +38,7 @@ class StatementsTableWidget extends StatelessWidget {
           name: 'الكمية ',
           headerTextStyle: TextStyleMange.headerTextStyle,
           cellBuilder: (context, data) {
-            return Text('${data.row.newAmount}/${data.row.amount}');
+            return Text('${data.row.newQuantity}/${data.row.notUsedQuantity}');
           },
           headerAlignment: Alignment.center,
           cellAlignment: Alignment.center,
@@ -69,7 +69,7 @@ class StatementsTableWidget extends StatelessWidget {
       type: MaterialType.transparency,
       child: EasyTable(
         EasyTableModel<MaterialModel>(
-            rows: bloc.listContractMaterialModel, columns: listColumn),
+            rows: bloc.listContractMaterialToAddToStatement, columns: listColumn),
         columnsFit: true,
       ),
     );

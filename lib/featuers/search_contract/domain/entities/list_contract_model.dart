@@ -26,16 +26,20 @@ class MaterialModel {
   final String number;
   final String name;
   final String unit;
-  final int amount;
-  int newAmount ;
+  final int quantity;
+  final String notUsedQuantity;
+  final String subContractNumber;
+  int newQuantity ;
   final double individualPrice;
 
   MaterialModel(
       {required this.id,
+      required this.notUsedQuantity,
       required this.number,
       required this.name,
-      required this.amount,
+      required this.quantity,
       required this.unit,
       required this.individualPrice,
-      this.newAmount=0});
+      required this.subContractNumber,
+      this.newQuantity=0});
 }

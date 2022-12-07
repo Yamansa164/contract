@@ -127,7 +127,7 @@ class ContractPage extends StatelessWidget {
                     text: 'تم اضافة الكشف بنجاح',
                     lottie: AssetJson.success,
                     onPressed: () {
-                      Navigator.popAndPushNamed(context, Routes.homeScreen);
+                     bloc.add(DoSearchContractEvent());
                     },
                   );
                 } else if (state is MaterialTableInitial) {
@@ -149,12 +149,24 @@ class ContractPage extends StatelessWidget {
                   return AddSubContractWidget(bloc: bloc);
                 } else if (state is AddMaterialToSubContractInItial) {
                   return AddMaterialToSubContractWidget(bloc: bloc);
-                }
-                else if (state is AddContractMaterialToSubContractInitial) {
+                } else if (state is AddContractMaterialToSubContractInitial) {
                   return AddContractMaterialToSubContractWidget(bloc: bloc);
-                }
-                else if (state is AddOtherMaterialToSubContractIntial) {
+                } else if (state is AddOtherMaterialToSubContractIntial) {
                   return AddOtherMaterialToSubContractWidget(bloc: bloc);
+                } else if (state is AddSubContractFaield) {
+                  return LottieWidget(
+                      text: state.failuer.message,
+                      lottie: AssetJson.error,
+                      onPressed: () {
+                        bloc.add(GoToAddSubContractinitial());
+                      });
+                } else if (state is AddSubContractSuccess) {
+                  return LottieWidget(
+                      text: 'تم اضافة الملحق بنجاح',
+                      lottie: AssetJson.success,
+                      onPressed: () {
+                        bloc.add(DoSearchContractEvent());
+                      });
                 }
 
                 return LottieWidget(

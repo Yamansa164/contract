@@ -28,13 +28,13 @@ class AddSubContractWidget extends StatelessWidget {
                 children: [
                   ColumnDatePicker(
                     title: ' : تاريخ امر المباشرة',
-                    controller: bloc.executingDate,
-                    value: bloc.statementDate.text,
+                    controller: bloc.staritngDateToSubContract,
+                    value: bloc.staritngDateToSubContract.text,
                   ),
                   ColumnTextField(
                     type: 'num',
                     title: ' : رقم الملحق',
-                    textEditingController: bloc.subContractNumber,
+                    textEditingController: bloc.numberToSubContract,
                   ),
                 ],
               ),
@@ -43,20 +43,20 @@ class AddSubContractWidget extends StatelessWidget {
                 children: [
                   ColumnDatePicker(
                     title: ' : تاريخ محضر الاتفاق',
-                    controller: bloc.agreeDate,
-                    value: bloc.statementDate.text,
+                    controller: bloc.agreeDateToSubContract,
+                    value: bloc.agreeDateToSubContract.text,
                   ),
                   ColumnTextField(
                     type: 'num',
                     title: ' : رقم محضر الاتفاق',
-                    textEditingController: bloc.agreeNumber,
+                    textEditingController: bloc.agreeNumberToSubContract,
                   ),
                 ],
               ),
               ColumnTextField(
                 type: 'name',
                 title: ': الموضوع',
-                textEditingController: bloc.subContractSubject,
+                textEditingController: bloc.subjectToSubContract,
                 width: 5,
               ),
               Row(
@@ -75,7 +75,7 @@ class AddSubContractWidget extends StatelessWidget {
                     buttonName: 'اضافة المواد الخاصة بالملحق ',
                     color: ColorManage.primery,
                     onPressed: () {
-                      if (!_formKey.currentState!.validate()) {
+                      if (_formKey.currentState!.validate()) {
                         bloc.add(GoToAddMaterialToSubContract());
                       }
                     },

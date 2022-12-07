@@ -17,7 +17,7 @@ class MaterialTableSubContract extends StatelessWidget {
           headerTextStyle: TextStyleMange.headerTextStyle,
           cellBuilder: (context, data) {
             return Text(
-                (data.row.individualPrice * data.row.newAmount).toString());
+                (data.row.individualPrice * data.row.newQuantity).toString());
           },
           headerAlignment: Alignment.center,
           cellAlignment: Alignment.center,
@@ -35,7 +35,7 @@ class MaterialTableSubContract extends StatelessWidget {
           name: 'الكمية ',
           headerTextStyle: TextStyleMange.headerTextStyle,
           cellBuilder: (context, data) {
-            return Text('${data.row.newAmount}');
+            return Text('${data.row.newQuantity}');
           },
           headerAlignment: Alignment.center,
           cellAlignment: Alignment.center,
@@ -66,7 +66,7 @@ class MaterialTableSubContract extends StatelessWidget {
       type: MaterialType.transparency,
       child: EasyTable(
         EasyTableModel<MaterialModel>(
-            rows: bloc.listContractMaterialModel, columns: listColumn),
+            rows: bloc.listMaterialToAddToSubContract, columns: listColumn),
         columnsFit: true,
       ),
     );

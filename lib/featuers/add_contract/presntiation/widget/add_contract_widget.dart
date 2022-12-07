@@ -58,11 +58,11 @@ class AddContractWidget extends StatelessWidget {
                             ),
                             ColumnDropDownItem(
                               items: ConstManage.addressItems,
-                              onChanged: (addressName) {
-                                bloc.setAddressName(addressName.toString());
+                              onChanged: (areaName) {
+                                bloc.setAreaName(areaName.toString());
                               },
                               title: ' : اسم الموقع',
-                              value: bloc.addressName.text,
+                              value: bloc.areaName.text,
                             ),
                           ],
                         ),
@@ -97,21 +97,13 @@ class AddContractWidget extends StatelessWidget {
                           children: [
                             ColumnDatePicker(
                               title: ': تاريخ العقد',
-                            
                               controller: bloc.contractDate,
                               value: bloc.contractDate.text,
                             ),
                             ColumnDatePicker(
                               title: ':   تاريخ المباشرة ',
-                              
                               controller: bloc.startDate,
                               value: bloc.startDate.text,
-                            ),
-                            ColumnDatePicker(
-                              title: ': تاريخ تسليم موقع العمل ',
-                              
-                              controller: bloc.finishDate,
-                              value: bloc.finishDate.text,
                             ),
                           ],
                         ),

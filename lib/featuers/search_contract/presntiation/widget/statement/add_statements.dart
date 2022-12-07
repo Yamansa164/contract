@@ -32,8 +32,8 @@ class AddStatementsWidget extends StatelessWidget {
             children: [
               ColumnDatePicker(
                 title: '',
-                controller: bloc.statementDate,
-                value: bloc.statementDate.text,
+                controller: bloc.dateToStatment,
+                value: bloc.dateToStatment.text,
               ),
               SizedBox(
                 width: SizeManage.screen.width / 30,
@@ -47,7 +47,7 @@ class AddStatementsWidget extends StatelessWidget {
                 width: SizeManage.screen.width / 25,
               ),
               ColumnTextField(
-                textEditingController: bloc.discount,
+                textEditingController: bloc.discountToStatment,
                 title: '',
                 type: 'num',
                 lable: 'نسبة مئوية',
@@ -74,7 +74,7 @@ class AddStatementsWidget extends StatelessWidget {
                 color: ColorManage.second,
                 onPressed: () {
                   bloc.add(DoSearchContractEvent());
-                  bloc.listContractMaterialModel.clear();
+                  bloc.listContractMaterialToAddToStatement.clear();
                 },
               ),
               NewButton(

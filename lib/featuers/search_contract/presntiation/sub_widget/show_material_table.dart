@@ -33,21 +33,15 @@ List<MaterialModel> listRow;
           EasyTableColumn<MaterialModel>(
         name: 'الكمية المتبقية',
         headerTextStyle: TextStyleMange.headerTextStyle,
-        intValue: ((row) => (row.amount-row.newAmount)),
+        stringValue: ((row) => (row.notUsedQuantity)),
         headerAlignment: Alignment.center,
         cellAlignment: Alignment.center,
         cellTextStyle:TextStyleMange.cellTextStyle),
-          EasyTableColumn<MaterialModel>(
-        name: 'الكمية المستهلكة' ,
-        headerTextStyle: TextStyleMange.headerTextStyle,
-        intValue: ((row) => row.newAmount),
-        headerAlignment: Alignment.center,
-        cellAlignment: Alignment.center,
-        cellTextStyle:TextStyleMange.cellTextStyle),
+     
     EasyTableColumn<MaterialModel>(
         name: 'الكمية الكلية',
         headerTextStyle: TextStyleMange.headerTextStyle,
-        intValue: ((row) => row.amount),
+        intValue: ((row) => row.quantity),
         headerAlignment: Alignment.center,
         cellAlignment: Alignment.center,
         cellTextStyle:TextStyleMange.cellTextStyle),
@@ -69,6 +63,13 @@ List<MaterialModel> listRow;
         name: 'الرقم',
         headerTextStyle: TextStyleMange.headerTextStyle,
         stringValue: ((row) => row.number),
+        headerAlignment: Alignment.center,
+        cellAlignment: Alignment.center,
+        cellTextStyle:TextStyleMange.cellTextStyle),
+          EasyTableColumn<MaterialModel>(
+        name: 'رقم الملحق',
+        headerTextStyle: TextStyleMange.headerTextStyle,
+        stringValue: ((row) => row.subContractNumber =='0'?'مادة عقدية':row.subContractNumber),
         headerAlignment: Alignment.center,
         cellAlignment: Alignment.center,
         cellTextStyle:TextStyleMange.cellTextStyle),

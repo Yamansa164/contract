@@ -38,7 +38,7 @@ class AddContractTableItemWidget extends StatelessWidget {
                   print(bloc.branch.text);
                   print(bloc.executingAgency.text);
                   print(bloc.projectName.text);
-                  print(bloc.addressName.text);
+                  print(bloc.projectName.text);
                   bloc.add(ExcuteAddContract());
                 },
                 width: 6,

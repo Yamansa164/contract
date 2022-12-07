@@ -2,6 +2,7 @@ import 'package:contracts/featuers/add_contract/data/repositories_impl/repositor
 import 'package:contracts/featuers/add_contract/domain/repostitories/repositories.dart';
 import 'package:contracts/featuers/add_contract/domain/usecase/add_contract_usecase.dart';
 import 'package:contracts/featuers/search_contract/domain/usecase/add_statements.dart';
+import 'package:contracts/featuers/search_contract/domain/usecase/add_sub_contract.dart';
 import 'package:contracts/featuers/search_contract/domain/usecase/get_statements.dart';
 import 'package:contracts/featuers/search_contract/domain/usecase/search_contract.dart';
 import 'package:get_it/get_it.dart';
@@ -23,6 +24,8 @@ Future<void> init() async {
       instance.registerFactory<AddStatementsUseCase>(() => AddStatementsUseCase(
       repositories: instance<ContractRepositories>()));
       instance.registerFactory<GetStatementsUseCase>(() => GetStatementsUseCase(
+      repositories: instance<ContractRepositories>()));
+      instance.registerFactory<AddSubContractUseCase>(() => AddSubContractUseCase(
       repositories: instance<ContractRepositories>()));
 
   // repository

@@ -1,5 +1,3 @@
-import 'package:contracts/featuers/search_contract/data/response/list_contracts_response.dart';
-import 'package:contracts/featuers/search_contract/data/response/material_response.dart';
 import 'package:contracts/featuers/search_contract/data/response/statement.dart';
 import 'package:contracts/featuers/search_contract/domain/entities/list_contract_model.dart';
 import 'package:contracts/featuers/search_contract/domain/entities/list_statements_model.dart';
@@ -11,10 +9,12 @@ extension MaterialModelMapper on MaterialsResponse? {
     return MaterialModel(
         id: this!.id,
         number: this!.number,
-        name: this!.materialName,
-        amount: this!.quantity,
-        unit: this!.unit,
-        individualPrice: this!.individualPrice);
+        name: this!.materialName.toString(),
+        unit: this!.unit.toString(),
+        quantity: int.parse(this!.quantity),
+        notUsedQuantity: (this!.notUsedQuantity),
+        individualPrice: this!.price,
+        subContractNumber: this!.subContractNumber);
   }
 }
 
@@ -31,10 +31,10 @@ extension ContractsModelMapper on ContractResponse? {
   }
 }
 
-extension ListContractsModelMapper on ListContractsResponse? {
+extension ListContractsModelMapper on ListContractResponse? {
   ListContractsModel toModel() {
     return ListContractsModel(
-        contract: this!.data.map((e) => e.toModel()).toList());
+        contract: this!.data!.map((e) => e.toModel()).toList());
   }
 }
 
@@ -43,7 +43,7 @@ extension StatementModelMapper on StatmentResponse? {
     return StatementModel(
         id: this!.id,
         date: this!.date,
-        overallPrice: this!.overallPrice,
+        overallPrice: this!.price,
         newPrice: this!.newPrice,
         discount: this!.discount,
         executingAgencyPrice: this!.executingAgencyPrice,

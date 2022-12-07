@@ -13,7 +13,7 @@ class ListStatementsResponse {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -25,7 +25,7 @@ class StatmentResponse {
   late int id;
   late int contractId;
   late String date;
-  late int overallPrice;
+  late int price;
   late int newPrice;
   late int discount;
   late int executingAgencyPrice;
@@ -38,7 +38,7 @@ class StatmentResponse {
       {required this.id,
       required this.contractId,
       required this.date,
-      required this.overallPrice,
+      required this.price,
       required this.newPrice,
       required this.discount,
       required this.executingAgencyPrice,
@@ -51,8 +51,8 @@ class StatmentResponse {
     id = json['id'];
     contractId = json['contract_id'];
     date = json['date'];
-    overallPrice = json['overall_price'];
-    newPrice = json['new_price'];
+    price = json['price'];
+    newPrice = json['up_price'];
     discount = json['discount'];
     executingAgencyPrice = json['executing_agency_price'];
     discountOfExecutingAgencyPrice = json['discount_of_executing_agency_price'];
@@ -62,7 +62,7 @@ class StatmentResponse {
     if (json['materials'] != null) {
       materials = <StatementMaterialsResponse>[];
       json['materials'].forEach((v) {
-        materials.add(new StatementMaterialsResponse.fromJson(v));
+        materials.add(StatementMaterialsResponse.fromJson(v));
       });
     }
   }
@@ -72,8 +72,8 @@ class StatmentResponse {
     data['id'] = id;
     data['contract_id'] = contractId;
     data['date'] = date;
-    data['overall_price'] = overallPrice;
-    data['new_price'] = newPrice;
+    data['price'] = price;
+    data['up_price'] = newPrice;
     data['discount'] = discount;
     data['executing_agency_price'] = executingAgencyPrice;
     data['discount_of_executing_agency_price'] = discountOfExecutingAgencyPrice;

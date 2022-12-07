@@ -1,8 +1,4 @@
-import 'dart:math';
-
-import 'package:contracts/core/widget/lottie_widget.dart';
 import 'package:contracts/core/widget/new_button.dart';
-import 'package:contracts/featuers/add_contract/domain/entities/contract_material.dart';
 
 import 'package:contracts/core/resources/const.dart';
 import 'package:contracts/featuers/search_contract/domain/entities/list_contract_model.dart';
@@ -26,7 +22,7 @@ class SelectMaterialToStatements extends StatelessWidget {
   Widget build(BuildContext context) {
     List.generate(bloc.contractsModel!.listMaterial.length, (index) {
       items.addAll({
-        bloc.contractsModel!.listMaterial[index].number.toString():
+        bloc.contractsModel!.listMaterial[index].id.toString():
             bloc.contractsModel!.listMaterial[index].name
       });
     });
@@ -42,17 +38,23 @@ class SelectMaterialToStatements extends StatelessWidget {
             RowDropDownItem(
               items: items,
               onChanged: (number) {
+                print(bloc.getSelectedMaterial);
+                print(bloc.contractsModel!.listMaterial.map((e) => e.id));
+
                 bloc.setSelectedMaterial(number.toString());
-                bloc.setMaxAmount(bloc.contractsModel!.listMaterial
-                    .elementAt(bloc.getSelectedMaterial)
-                    .amount);
+                int amount = int.parse(bloc.contractsModel!.listMaterial
+                    .singleWhere(
+                        (element) => element.id == bloc.getSelectedMaterial)
+                    .notUsedQuantity);
+                bloc.setMaxAmount(amount);
+                print(bloc.getMaxAmount);
               },
               title: 'اسم المادة',
             ),
             RowTextField(
               type: 'num',
               title: ': الكمية',
-              textEditingController: bloc.materialAmountForStatemets,
+              textEditingController: bloc.materialAmountToStatemets,
             ),
             SizedBox(
               height: SizeManage.screen.height / 50,
@@ -73,21 +75,27 @@ class SelectMaterialToStatements extends StatelessWidget {
                     buttonName: 'اضافة',
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        if (int.parse(bloc.materialAmountForStatemets.text) >
+                        if (int.parse(bloc.materialAmountToStatemets.text) >
                             bloc.getMaxAmount) {
                           bloc.add(MaterialAmountFaieldEvent(
                               message:
                                   ' الكمية العظمة هي  ${bloc.getMaxAmount}'));
                         } else {
+                          print('x');
                           MaterialModel materialModel = bloc
                               .contractsModel!.listMaterial
-                              .elementAt(bloc.getSelectedMaterial);
-                          materialModel.newAmount =
-                              int.parse(bloc.materialAmountForStatemets.text);
+                              .singleWhere((element) =>
+                                  element.id == bloc.getSelectedMaterial);
 
-                          bloc.listContractMaterialModel.add(materialModel);
-                          bloc.materialAmountForStatemets.clear();
-                          // bloc.contractsModel!.listMaterial.removeAt(bloc.getSelectedMaterial);
+                          materialModel.newQuantity =
+                              int.parse(bloc.materialAmountToStatemets.text);
+
+                          bloc.listContractMaterialToAddToStatement
+                              .add(materialModel);
+                          bloc.materialAmountToStatemets.clear();
+                          bloc.contractsModel!.listMaterial.removeWhere(
+                              (element) =>
+                                  element.id == bloc.getSelectedMaterial);
                           bloc.add(GoToAddStatementsEvent());
                         }
                       }

@@ -13,7 +13,7 @@ class MaterialTableItemWidget extends StatelessWidget {
   MaterialTableItemWidget(
       {super.key, required this.bloc, required this.listRow});
   final List<MaterialModel> listRow;
-  ContractBloc bloc;
+ final ContractBloc bloc;
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:contracts/core/error/failuer.dart';
 import 'package:contracts/core/resources/const.dart';
@@ -28,6 +27,7 @@ class AddContractRemoteDataSourceImpl extends AddContractRemoteDataSource {
     try {
       final http.Response response = await http.post(Uri.parse('${ConstManage.url}/contracts/'),
           headers: headers, body: jsonEncode(body));
+          print(response.statusCode);
       if (response.statusCode == 201) {
         return const Right(true);
       } else {

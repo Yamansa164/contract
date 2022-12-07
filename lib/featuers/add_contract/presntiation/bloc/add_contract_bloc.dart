@@ -32,19 +32,18 @@ class AddContractBloc extends Bloc<AddContractEvent, AddContractState> {
       emit(LoadingState());
       Either<Failuer, bool> successOrFaliuer = await addContractUseCase.excute(
           input: AddContractRequest(
-        name: projectName.text,
+        areaName: areaName.text,
         executingAgency: executingAgency.text,
         watchingAgency: watchingAgency.text,
         date: contractDate.text,
         startingDate: startDate.text,
-        finishingDate: finishDate.text,
         executionPeriod: executionPeriod.text,
         upPercent: int.parse(upPercent.text),
         downPercent: int.parse(downPercent.text),
         number: contractNum.text,
         stoppingsPercent: int.parse(stopping.text),
         branch: branch.text,
-        content: 's',
+        projectName: projectName.text,
         materials: List<ContractMaterialsRequest>.from(
             listRow.map((e) => e.toRequest())),
       ));
@@ -66,41 +65,20 @@ class AddContractBloc extends Bloc<AddContractEvent, AddContractState> {
 
   /// contract info
 
-  ///1 2  3
-  final TextEditingController branch = TextEditingController();
-  final TextEditingController addressName = TextEditingController();
-  final TextEditingController contractNum = TextEditingController();
-
-  /// 4  5   6
-  final TextEditingController executionPeriod = TextEditingController();
-  final TextEditingController projectName = TextEditingController();
-
-  final TextEditingController stopping = TextEditingController();
-
-  /// 7 8 9
-  final TextEditingController upPercent = TextEditingController(text: '0');
-  final TextEditingController downPercent = TextEditingController(text: '0');
-
-  /// 13 c
-  final TextEditingController executingAgency = TextEditingController();
-  final TextEditingController watchingAgency = TextEditingController();
+  final TextEditingController areaName = TextEditingController();// اسم الموقع
+  final TextEditingController branch = TextEditingController();//اسم الفرع
+  final TextEditingController projectName = TextEditingController();  //اسم المشروع
+  final TextEditingController contractNum = TextEditingController();// رقم لعقد
+  final TextEditingController executionPeriod = TextEditingController();//  مدة التنفيذ
+  final TextEditingController stopping = TextEditingController();// نسبة التوقيفات
+  final TextEditingController upPercent = TextEditingController(text: '0');// نسبة التنزيل
+  final TextEditingController downPercent = TextEditingController(text: '0');// نسبة الضم
+  final TextEditingController executingAgency = TextEditingController();// الجهة المنفذة 
+  final TextEditingController watchingAgency = TextEditingController();// الجهة المشرفة
 
   ///date
-  final TextEditingController startDate = TextEditingController();
-  final TextEditingController finishDate = TextEditingController();
-  final TextEditingController contractDate = TextEditingController();
-
-  void setStartDate(String date) {
-    startDate.text = date;
-  }
-
-  void setFinishingDate(String date) {
-    finishDate.text = date;
-  }
-
-  void setContractDate(String date) {
-    contractDate.text = date;
-  }
+  final TextEditingController startDate = TextEditingController();// تاريخ المباشرة 
+  final TextEditingController contractDate = TextEditingController();// تاريخ العقد
 
   void setBranch(String branchName) {
     branch.text = branchName;
@@ -114,8 +92,8 @@ class AddContractBloc extends Bloc<AddContractEvent, AddContractState> {
     watchingAgency.text = watchingAgencyName;
   }
 
-  void setAddressName(String addressNameText) {
-    addressName.text = addressNameText;
+  void setAreaName(String areaNameText) {
+    areaName.text = areaNameText;
   }
 
   ////////////
@@ -127,11 +105,11 @@ class AddContractBloc extends Bloc<AddContractEvent, AddContractState> {
   final TextEditingController materialPrice = TextEditingController();
   void clearAll() {
     listRow.clear();
-    projectName.clear();
+    areaName.clear();
     branch.clear();
     contractNum.clear();
     executingAgency.clear();
-    addressName.clear();
+    projectName.clear();
 
     upPercent.text = '0';
     downPercent.text = '0';
