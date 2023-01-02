@@ -51,3 +51,13 @@ class GoToAddContractMaterialToSubContract extends ContractEvent {}
 class GoToAddOtherMaterialToSubContract extends ContractEvent {}
 
 class ExcuteAddSubContract extends ContractEvent {}
+
+
+////// quater
+ class GoToAddQuarterEvent extends ContractEvent{
+    
+ }
+
+class ExcuteAddQuarterEvent extends ContractEvent {}
+
+class GoToAddQuarterMaterialEvent extends ContractEvent {}

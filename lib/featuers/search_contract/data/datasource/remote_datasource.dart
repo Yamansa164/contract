@@ -48,18 +48,15 @@ class ContractRemoteDataSourceImpl extends ContractRemoteDatasource {
           Uri.parse('${ConstManage.url}/contracts/search'),
           headers: headers,
           body: jsonEncode(body));
-      print(response.statusCode);
 
       if (response.statusCode == 200) {
         return Right(ListContractResponse.fromJson(jsonDecode(response.body)));
       } else {
         final body = jsonDecode(response.body);
-        print(body['error']);
 
         return Left(Failuer(message: body['error']));
       }
     } catch (e) {
-      print(e);
       return Left(ServerFailure());
     }
   }
@@ -111,19 +108,13 @@ class ContractRemoteDataSourceImpl extends ContractRemoteDatasource {
       );
 
       if (response.statusCode == 200) {
-        print(id);
-        print(jsonDecode(response.body));
-        print('sss');
         return Right(
             ListStatementsResponse.fromJson(jsonDecode(response.body)));
       } else {
         final body = jsonDecode(response.body);
-        print('eee');
-        print(body);
         return Left(Failuer(message: body['error']));
       }
     } catch (e) {
-      print(e);
       return Left(ServerFailure());
     }
   }
@@ -140,15 +131,12 @@ class ContractRemoteDataSourceImpl extends ContractRemoteDatasource {
       'Accept': 'application/json',
     };
     final Map<String, dynamic> body = addSubContractRequest.toJson();
-
+     print(body);
     try {
       final http.Response response = await http.post(
           Uri.parse('${ConstManage.url}/contracts/$contractId/subs/'),
           headers: headers,
           body: jsonEncode(body));
-          print(contractId);
-      print(response.body);
-      print(jsonEncode(body));
       if (response.statusCode == 200) {
         return const Right(true);
       } else {

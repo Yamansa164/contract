@@ -32,14 +32,14 @@ class AddMaterialToSubContractWidget extends StatelessWidget {
             bloc.add(ExcuteAddSubContract());
               },
             ),
-            NewButton(
-              width: 6,
-              buttonName: ' اضافة مادة  عقدية',
-              color: ColorManage.second,
-              onPressed: () {
-                bloc.add(GoToAddContractMaterialToSubContract());
-              },
-            ),
+            // NewButton(
+            //   width: 6,
+            //   buttonName: ' اضافة مادة  عقدية',
+            //   color: ColorManage.second,
+            //   onPressed: () {
+            //     bloc.add(GoToAddContractMaterialToSubContract());
+            //   },
+            // ),
             NewButton(
               width: 6,
               buttonName: 'اضافة مادة جديدة',

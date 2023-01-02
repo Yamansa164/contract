@@ -61,8 +61,8 @@ class ColumnDropDownItem extends StatelessWidget {
             items: items
                 .map(
                   (item) => DropdownMenuItem(
-                    child: Text(item),
                     value: item,
+                    child: Text(item),
                   ),
                 )
                 .toList(),

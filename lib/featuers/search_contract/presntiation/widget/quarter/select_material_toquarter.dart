@@ -11,8 +11,8 @@ import '../../../../../../core/resources/decoration_manager.dart';
 import '../../../../../core/widget/row_drop_down_item.dart';
 import '../../../../../core/widget/row_text_field.dart';
 
-class SelectMaterialToStatements extends StatelessWidget {
-  SelectMaterialToStatements({super.key, required this.bloc});
+class SelectMaterialToQuarter extends StatelessWidget {
+  SelectMaterialToQuarter({super.key, required this.bloc});
   final ContractBloc bloc;
 
   final _formKey = GlobalKey<FormState>();
@@ -21,10 +21,12 @@ class SelectMaterialToStatements extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List.generate(bloc.contractsModel!.listMaterial.length, (index) {
-      items.addAll({
-        bloc.contractsModel!.listMaterial[index].id.toString():
-            '${bloc.contractsModel!.listMaterial[index].name} (${bloc.contractsModel!.listMaterial[index].subContractNumber == '0' ? 'عقدية' :  bloc.contractsModel!.listMaterial[index].subContractNumber})'
-      });
+      if (bloc.contractsModel!.listMaterial[index].subContractNumber == '0') {
+        items.addAll({
+          bloc.contractsModel!.listMaterial[index].id.toString():
+              '${bloc.contractsModel!.listMaterial[index].name} (${bloc.contractsModel!.listMaterial[index].subContractNumber == '0' ? 'عقدية' : bloc.contractsModel!.listMaterial[index].subContractNumber})'
+        });
+      }
     });
     return Form(
       key: _formKey,
@@ -38,23 +40,15 @@ class SelectMaterialToStatements extends StatelessWidget {
             RowDropDownItem(
               items: items,
               onChanged: (number) {
-                print(bloc.getSelectedMaterial);
-                print(bloc.contractsModel!.listMaterial.map((e) => e.id));
-
                 bloc.setSelectedMaterial(number.toString());
-                int amount = int.parse(bloc.contractsModel!.listMaterial
-                    .singleWhere(
-                        (element) => element.id == bloc.getSelectedMaterial)
-                    .notUsedQuantity);
-                bloc.setMaxAmount(amount);
-                print(bloc.getMaxAmount);
+                print(bloc.getSelectedMaterial);
               },
               title: 'اسم المادة',
             ),
             RowTextField(
               type: 'num',
-              title: ': الكمية',
-              textEditingController: bloc.materialAmountToStatemets,
+              title: ': النسبة',
+              textEditingController: bloc.quarterPercent,
             ),
             SizedBox(
               height: SizeManage.screen.height / 50,
@@ -67,7 +61,7 @@ class SelectMaterialToStatements extends StatelessWidget {
                   buttonName: 'الرجوع ',
                   color: ColorManage.primery,
                   onPressed: () {
-                    bloc.add(GoToAddStatementsEvent());
+                    bloc.add(GoToAddQuarterEvent());
                   },
                 ),
                 NewButton(
@@ -75,30 +69,24 @@ class SelectMaterialToStatements extends StatelessWidget {
                     buttonName: 'اضافة',
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        if (int.parse(bloc.materialAmountToStatemets.text) >
-                            bloc.getMaxAmount) {
-                          bloc.add(MaterialAmountFaieldEvent(
-                              message:
-                                  ' الكمية العظمة هي  ${bloc.getMaxAmount}'));
-                        } else {
-                          print('x');
+                       
                           MaterialModel materialModel = bloc
                               .contractsModel!.listMaterial
                               .singleWhere((element) =>
                                   element.id == bloc.getSelectedMaterial);
 
-                          materialModel.newQuantity =
-                              int.parse(bloc.materialAmountToStatemets.text);
+                          materialModel.quarterPercent =
+                              int.parse(bloc.quarterPercent.text);
 
-                          bloc.listContractMaterialToAddToStatement
+                          bloc.listMaterialToAddToQuarter
                               .add(materialModel);
-                          bloc.materialAmountToStatemets.clear();
+                          bloc.quarterPercent.clear();
                           bloc.contractsModel!.listMaterial.removeWhere(
                               (element) =>
                                   element.id == bloc.getSelectedMaterial);
-                          bloc.add(GoToAddStatementsEvent());
+                          bloc.add(GoToAddQuarterEvent());
                         }
-                      }
+                      
                     },
                     color: ColorManage.primery),
               ],

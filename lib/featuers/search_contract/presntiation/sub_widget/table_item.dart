@@ -22,7 +22,7 @@ class TableItemWidget extends StatelessWidget {
         Container(
           decoration: DecorationManage.tableDecoration,
           height: SizeManage.screen.height / 2,
-          width: SizeManage.screen.width - 400,
+          width: SizeManage.screen.width - 200,
           child: Center(child: tableWidget),
         ),
         SizedBox(

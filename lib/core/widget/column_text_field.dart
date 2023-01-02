@@ -48,7 +48,8 @@ class ColumnTextField extends StatelessWidget {
               textDirection: TextDirection.rtl,
               child: TextFormField(
                 inputFormatters: <TextInputFormatter>[
-                  if (type != 'name') FilteringTextInputFormatter.digitsOnly
+                  if (type != 'name') 
+              FilteringTextInputFormatter.allow(RegExp(r'[0-9.]'))
                 ],
                 controller: textEditingController,
                 decoration: InputDecoration(labelText: lable),

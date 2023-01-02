@@ -16,6 +16,27 @@ class SearchContractTableWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     List<EasyTableColumn<ContractsModel>> listColumn = [
       EasyTableColumn<ContractsModel>(
+          resizable: false,
+          width: 200,
+          name: 'ربع نظامي ',
+          headerTextStyle: TextStyleMange.headerTextStyle,
+          cellBuilder: (context, data) {
+            return NewButton(
+              width: 17,
+              buttonName: 'اضافة',
+              color: ColorManage.primery,
+              onPressed: () {
+                bloc.contractsModel = data.row;
+
+                bloc.add(GoToAddQuarterEvent());
+              },
+              fontsize: 12,
+            );
+          },
+          headerAlignment: Alignment.center,
+          cellAlignment: Alignment.center,
+          cellTextStyle: TextStyleMange.cellTextStyle),
+      EasyTableColumn<ContractsModel>(
           name: 'الكشوف ',
           headerTextStyle: TextStyleMange.headerTextStyle,
           cellBuilder: (context, data) {
@@ -61,7 +82,7 @@ class SearchContractTableWidget extends StatelessWidget {
                   buttonName: 'اضافة ',
                   color: ColorManage.primery,
                   onPressed: () {
-                      bloc.contractsModel = data.row;
+                    bloc.contractsModel = data.row;
                     bloc.add(GoToAddSubContractinitial());
                   },
                   fontsize: 12,

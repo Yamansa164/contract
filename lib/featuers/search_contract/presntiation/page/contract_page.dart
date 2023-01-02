@@ -2,6 +2,8 @@ import 'package:contracts/core/widget/lottie_widget.dart';
 import 'package:contracts/core/widget/new_button.dart';
 import 'package:contracts/featuers/search_contract/presntiation/bloc/contract_bloc.dart';
 import 'package:contracts/featuers/search_contract/presntiation/sub_widget/contract_table.dart';
+import 'package:contracts/featuers/search_contract/presntiation/widget/quarter/add_quarter_widget.dart';
+import 'package:contracts/featuers/search_contract/presntiation/widget/quarter/select_material_toquarter.dart';
 
 import 'package:contracts/featuers/search_contract/presntiation/widget/statement/select_material_tostatements.dart';
 import 'package:contracts/featuers/search_contract/presntiation/widget/statement/add_statements.dart';
@@ -149,9 +151,11 @@ class ContractPage extends StatelessWidget {
                   return AddSubContractWidget(bloc: bloc);
                 } else if (state is AddMaterialToSubContractInItial) {
                   return AddMaterialToSubContractWidget(bloc: bloc);
-                } else if (state is AddContractMaterialToSubContractInitial) {
-                  return AddContractMaterialToSubContractWidget(bloc: bloc);
-                } else if (state is AddOtherMaterialToSubContractIntial) {
+                } 
+                // else if (state is AddContractMaterialToSubContractInitial) {
+                //   return AddContractMaterialToSubContractWidget(bloc: bloc);
+                // } 
+                else if (state is AddOtherMaterialToSubContractIntial) {
                   return AddOtherMaterialToSubContractWidget(bloc: bloc);
                 } else if (state is AddSubContractFaield) {
                   return LottieWidget(
@@ -168,7 +172,12 @@ class ContractPage extends StatelessWidget {
                         bloc.add(DoSearchContractEvent());
                       });
                 }
-
+                else if (state is AddQuarterInitial) {
+                  return AddQuarterTableWidget(bloc: bloc, );
+                }
+              else if (state is AddQuarterMaterialInitial) {
+                  return SelectMaterialToQuarter(bloc: bloc, );
+                }
                 return LottieWidget(
                   text: 'يوجد خطأ ما',
                   lottie: AssetJson.error,

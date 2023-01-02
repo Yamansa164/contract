@@ -1,20 +1,22 @@
-import 'package:contracts/core/resources/color_manager.dart';
-import 'package:contracts/core/resources/const.dart';
-import 'package:contracts/core/resources/text_style_manager.dart';
-import 'package:contracts/core/widget/column_text_field.dart';
-import 'package:contracts/core/widget/column_date_picker.dart';
-import 'package:contracts/core/widget/new_button.dart';
 import 'package:contracts/featuers/search_contract/presntiation/bloc/contract_bloc.dart';
-import 'package:contracts/featuers/search_contract/presntiation/sub_widget/statements_table.dart';
+import 'package:contracts/featuers/search_contract/presntiation/sub_widget/quarter_table.dart';
 import 'package:contracts/featuers/search_contract/presntiation/sub_widget/table_item.dart';
 import 'package:flutter/material.dart';
 
-class AddStatementsWidget extends StatelessWidget {
-  AddStatementsWidget({super.key, required this.bloc});
-  ContractBloc bloc;
+import '../../../../../../core/resources/const.dart';
+import '../../../../../core/resources/color_manager.dart';
+import '../../../../../core/resources/text_style_manager.dart';
+import '../../../../../core/widget/column_text_field.dart';
+import '../../../../../core/widget/new_button.dart';
+
+class AddQuarterTableWidget extends StatelessWidget {
+  AddQuarterTableWidget(
+      {super.key, required this.bloc, });
+ final ContractBloc bloc;
   final _formKey = GlobalKey<FormState>();
+
   @override
-  Widget build(BuildContext context) {
+   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
       child: Column(
@@ -23,33 +25,18 @@ class AddStatementsWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              ColumnDatePicker(
-                title: '',
-                controller: bloc.dateToStatment,
-                value: bloc.dateToStatment.text,
-              ),
-              SizedBox(
-                width: SizeManage.screen.width / 30,
-              ),
-              Text(
-                ': قيمة الاعمال والاشغال بالمواد لغاية',
-                style: TextStyleMange.headerTextStyle
-                    .copyWith(color: Colors.white, letterSpacing: 0.6),
-              ),
-              SizedBox(
-                width: SizeManage.screen.width / 25,
-              ),
+              
+             
               ColumnTextField(
-                textEditingController: bloc.discountToStatment,
+                textEditingController: bloc.quarterNum,
                 title: '',
                 type: 'num',
-                lable: 'نسبة مئوية',
               ),
               SizedBox(
                 width: SizeManage.screen.width / 30,
               ),
               Text(
-                ': الحسوميات    ',
+                ' : رقم التكليف',
                 style: TextStyleMange.headerTextStyle
                     .copyWith(color: Colors.white, letterSpacing: 0.6),
               ),
@@ -59,7 +46,7 @@ class AddStatementsWidget extends StatelessWidget {
             height: SizeManage.screen.height / 100,
           ),
           TableItemWidget(
-            tableWidget: StatementsTableWidget(bloc: bloc),
+            tableWidget: QuarterTable(bloc: bloc,),
             listWidget: [
               NewButton(
                 width: 6,
@@ -72,11 +59,11 @@ class AddStatementsWidget extends StatelessWidget {
               ),
               NewButton(
                 width: 6,
-                buttonName: 'تنظيم الكشف',
+                buttonName: 'اضافة الربع',
                 color: ColorManage.second,
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    bloc.add(ExcuteAddStatementsEvent());
+                    bloc.add(ExcuteAddQuarterEvent());
                    
                   }
                 },
@@ -86,7 +73,7 @@ class AddStatementsWidget extends StatelessWidget {
                 buttonName: 'اضافة مادة',
                 color: ColorManage.second,
                 onPressed: () {
-                  bloc.add(GoToAddStatementsMaterialEvent());
+                  bloc.add(GoToAddQuarterMaterialEvent  ());
                 },
               ),
             ],

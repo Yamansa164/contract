@@ -16,6 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/error/failuer.dart';
 import '../../domain/entities/list_contract_model.dart';
 import '../../domain/usecase/get_statements.dart';
+import '../widget/quarter/select_material_toquarter.dart';
 
 part 'contract_event.dart';
 part 'contract_state.dart';
@@ -48,7 +49,6 @@ class ContractBloc extends Bloc<ContractEvent, ContractState> {
     ////
     ///  Statement
     on<GoToAddStatementsEvent>((event, emit) {
-   
       emit(AddStatementsInitial());
     });
     on<GoToAddStatementsMaterialEvent>((event, emit) {
@@ -105,9 +105,9 @@ class ContractBloc extends Bloc<ContractEvent, ContractState> {
       emit(AddMaterialToSubContractInItial());
     });
     // contract material
-    on<GoToAddContractMaterialToSubContract>((event, emit) async {
-      emit(AddContractMaterialToSubContractInitial());
-    });
+    // on<GoToAddContractMaterialToSubContract>((event, emit) async {
+    //   emit(AddContractMaterialToSubContractInitial());
+    // });
     ////
     // Other material
     on<GoToAddOtherMaterialToSubContract>((event, emit) async {
@@ -129,14 +129,19 @@ class ContractBloc extends Bloc<ContractEvent, ContractState> {
         contractId: contractsModel!.id,
       ));
       successOrFailuer
-          .fold((faliuer) => emit(AddSubContractFaield(failuer: faliuer)),
-           (_) {
+          .fold((faliuer) => emit(AddSubContractFaield(failuer: faliuer)), (_) {
         emit(AddSubContractSuccess());
         subContractClear();
-       
       });
     });
-    ////
+    //// quarter
+    on<GoToAddQuarterEvent>((event, emit) {
+      emit(AddQuarterInitial());
+    });
+    on<GoToAddQuarterMaterialEvent>((event, emit) {
+      emit(AddQuarterMaterialInitial());
+    });
+    
   }
   static ContractBloc getBloc(BuildContext context) {
     return BlocProvider.of<ContractBloc>(context);
@@ -159,7 +164,7 @@ class ContractBloc extends Bloc<ContractEvent, ContractState> {
   int _selectedMaterial = 0;
   int get getSelectedMaterial => _selectedMaterial;
   void setSelectedMaterial(String number) {
-    _selectedMaterial = int.parse(number) ;
+    _selectedMaterial = int.parse(number);
   }
 
   int _maxAmount = 0;
@@ -167,7 +172,8 @@ class ContractBloc extends Bloc<ContractEvent, ContractState> {
   void setMaxAmount(int amount) {
     _maxAmount = amount;
   }
-   /// Add New Material To Statement
+
+  /// Add New Material To Statement
   final TextEditingController otherMaterialName = TextEditingController();
   final TextEditingController otherMaterialUnit = TextEditingController();
   final TextEditingController otherMaterialAmount = TextEditingController();
@@ -196,20 +202,25 @@ class ContractBloc extends Bloc<ContractEvent, ContractState> {
 
   ///
 
-
   ListContractsModel? listContractsModel;
   ListStatementModel? listStatementModel;
   ContractsModel? contractsModel;
   // List<MaterialModel> listOtherMaterialModel =[];
 
-  void subContractClear(){
- listContractMaterialToAddToSubContract.clear();
-        listOtherMaterialToAddToSubContract.clear();
-        listMaterialToAddToSubContract.clear();
-        subjectToSubContract.clear();
-        numberToSubContract.clear();
-        agreeNumberToSubContract.clear();
-        agreeDateToSubContract.clear();
-        staritngDateToSubContract.clear();
+  void subContractClear() {
+    listContractMaterialToAddToSubContract.clear();
+    listOtherMaterialToAddToSubContract.clear();
+    listMaterialToAddToSubContract.clear();
+    subjectToSubContract.clear();
+    numberToSubContract.clear();
+    agreeNumberToSubContract.clear();
+    agreeDateToSubContract.clear();
+    staritngDateToSubContract.clear();
   }
+
+  ///////////// quarter
+  final TextEditingController quarterPercent = TextEditingController();
+    final TextEditingController quarterNum = TextEditingController();
+
+  List<MaterialModel> listMaterialToAddToQuarter = [];
 }

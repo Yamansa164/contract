@@ -30,6 +30,7 @@ class MaterialModel {
   final String notUsedQuantity;
   final String subContractNumber;
   int newQuantity ;
+  int quarterPercent;
   final double individualPrice;
 
   MaterialModel(
@@ -41,5 +42,7 @@ class MaterialModel {
       required this.unit,
       required this.individualPrice,
       required this.subContractNumber,
-      this.newQuantity=0});
+      this.newQuantity=0,
+      this.quarterPercent=0
+      });
 }

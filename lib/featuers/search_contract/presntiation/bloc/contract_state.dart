@@ -98,17 +98,34 @@ class AddSubContractFaield extends ContractState {
 
 class AddMaterialToSubContractInItial extends ContractState {}
 //// contract material
-class AddContractMaterialToSubContractInitial extends ContractState {}
-class ExcuteAddContractMaterialToSubContract extends ContractState {}
+// class AddContractMaterialToSubContractInitial extends ContractState {}
+// class ExcuteAddContractMaterialToSubContract extends ContractState {}
 //////
 
 
 /// other material
 class AddOtherMaterialToSubContractIntial extends ContractState {}
-class ExcuteAddOtherMaterialToSubContract extends ContractState {}
+// class ExcuteAddOtherMaterialToSubContract extends ContractState {}
 //////
 
 
+//////// quarter 
+class AddQuarterInitial extends ContractState{
+}
+
+class AddQuartersuccess extends ContractState {
+  @override
+  List<Object> get props => [];
+}
+
+class AddQuarterFaield extends ContractState {
+  final Failuer failuer;
+  const AddQuarterFaield({required this.failuer});
+  @override
+  List<Object> get props => [failuer];
+}
+
+class AddQuarterMaterialInitial extends ContractState {}
 
 
 
