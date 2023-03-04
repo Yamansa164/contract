@@ -1,6 +1,6 @@
 # contracts
 
-A new Flutter project.
+A new Flutter Web project.
 
 ## Getting Started
 
